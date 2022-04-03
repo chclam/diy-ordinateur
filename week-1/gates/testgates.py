@@ -46,10 +46,19 @@ class TestGates(unittest.TestCase):
     self.assertEqual(dmux(0, 1), (0, 0))
     self.assertEqual(dmux(1, 1), (0, 1))
 
-  def test_multi_not(self):
-    self.assertEqual(multi_not([0]), [1])
-    self.assertEqual(multi_not([1]), [0])
-    self.assertEqual(multi_not([0, 1]), [1, 0])
+  def test_not16(self):
+    self.assertEqual(not16([1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1]), [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0])
+
+  def test_or8way(self):
+    self.assertEqual(or8way([0, 1, 0, 0, 0, 0, 0, 0]), 1)
+    self.assertEqual(or8way([1, 1, 0, 0, 0, 0, 0, 0]), 1)
+    self.assertEqual(or8way([0, 0, 0, 0, 0, 0, 0, 0]), 0)
+
+  def test_and8way(self):
+    self.assertEqual(and8way([0, 1, 0, 0, 0, 0, 0, 0]), 0)
+    self.assertEqual(and8way([1, 1, 0, 0, 0, 0, 0, 0]), 0)
+    self.assertEqual(and8way([0, 0, 0, 0, 0, 0, 0, 0]), 0)
+    self.assertEqual(and8way([1, 1, 1, 1, 1, 1, 1, 1]), 1)
 
   def test_half_adder(self):
     self.assertEqual(half_adder(0, 0), (0, 0))
@@ -66,3 +75,4 @@ class TestGates(unittest.TestCase):
     self.assertEqual(full_adder(0, 1, 1), (1, 0))
     self.assertEqual(full_adder(1, 0, 1), (1, 0))
     self.assertEqual(full_adder(1, 1, 1), (1, 1))
+
